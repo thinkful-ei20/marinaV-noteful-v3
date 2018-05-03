@@ -11,7 +11,7 @@ mongoose.connect(MONGODB_URI)
   .then(() => mongoose.connection.db.dropDatabase())
   .then(() => Note.insertMany(seedNotes))
   .then(results => {
-    console.log('***** results ********', results);
+    // console.log('***** results ********', results);
     console.info(`Inserted ${results.length} Notes`);
   })
   .then(() => mongoose.disconnect())

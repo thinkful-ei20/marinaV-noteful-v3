@@ -1,13 +1,19 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const noteSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  content: { type: String }
+const noteSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  content: String
 }, {
   timestamps: true
 });
+
+const Note = mongoose.model('Note', noteSchema);
 
 noteSchema.set('toObject', {
   transform: function (doc, ret) {
@@ -17,4 +23,4 @@ noteSchema.set('toObject', {
   }
 });
 
-module.exports = mongoose.model('Note', noteSchema);
+module.exports = Note;
