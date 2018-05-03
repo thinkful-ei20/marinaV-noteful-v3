@@ -8,7 +8,7 @@ const Note = require('../models/note');
 router.get('/', (req, res, next) => {
   const { searchTerm } = req.query;
 
-  console.log('***************', searchTerm);
+  console.log('********* searchTerm ******', searchTerm);
 
   let filter = {};
 
@@ -18,8 +18,9 @@ router.get('/', (req, res, next) => {
   }
 
   Note.find(filter)
-    .sort('created')
+    .sort({ 'updatedAt': 'desc' })
     .then(results => {
+      console.log('******** find ALL notes results *****', results);
       res.json(results);
     })
     .catch(next);
@@ -27,7 +28,7 @@ router.get('/', (req, res, next) => {
 
 /* ========== GET/READ A SINGLE ITEM ========== */
 router.get('/:id', (req, res, next) => {
-  console.log('***************', req.params.id);
+  console.log('******** req.params.id *******', req.params.id);
 
   Note
     .findById(req.params.id)
